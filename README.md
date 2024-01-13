@@ -25,7 +25,7 @@ nimble install winim
 
 ![image-20240107153547666](img/image1.png)
 
-## 
+
 
 ## 换 icon
 
@@ -45,10 +45,45 @@ demo2 ICON "app.ico"
 
 
 
+# 不生成 exe 怎么办？
+
+等待20-40秒
+
+排错步骤：
+
+如果下面的程序没有编译成功，就说明环境有问题。根据编译结果来排错
+
+```bash
+┌──(root㉿kali)-[~]
+└─# cat hello.nim                                         
+import winim
+{.link: "/tmp/icon.o".}
+echo "Hello, World!"
+                                                                                                                                                                      
+┌──(root㉿kali)-[~]
+└─# cp ~/CobaltStrike/CS-plugin/CSx3Ldr/icon.o /tmp/icon.o
+                                                                                                                                                                      
+┌──(root㉿kali)-[~]
+└─# nim c -d=release -d=mingw --app=gui --cpu=amd64 --opt:size -d:strip hello.nim
+Hint: used config file '/etc/nim/nim.cfg' [Conf]
+Hint: used config file '/etc/nim/config.nims' [Conf]
+.................................................................................................................................................
+/root/hello.nim(1, 8) Warning: imported and not used: 'winim' [UnusedImport]
+Hint:  [Link]
+Hint: gc: refc; opt: size; options: -d:release
+1275906 lines; 3.510s; 280.109MiB peakmem; proj: /root/hello.nim; out: /root/hello.exe [SuccessX]
+```
+
+
+
+
+
 
 
 # 参考 
 
+https://github.com/byt3bl33d3r/OffensiveNim
+
 https://github.com/RCStep/CSSG
 
-https://github.com/hack2fun/BypassAV/tree/master
+https://github.com/hack2fun/BypassAV
